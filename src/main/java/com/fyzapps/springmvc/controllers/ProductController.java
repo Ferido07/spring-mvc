@@ -42,4 +42,10 @@ public class ProductController {
         Product savedProduct = productService.saveOrUpdate(product);
         return "redirect:/products/" + savedProduct.getId();
     }
+
+    @RequestMapping("/products/edit/{id}")
+    public String edit(@PathVariable Integer id, Model model){
+        model.addAttribute("product",productService.getProductById(id));
+        return "productForm";
+    }
 }
