@@ -3,16 +3,16 @@ package com.fyzapps.springmvc.models;
 import java.math.BigDecimal;
 
 public class Product {
-    private int id;
+    private Integer id;
     private String description;
     private BigDecimal price;
     private String imageUrl;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
