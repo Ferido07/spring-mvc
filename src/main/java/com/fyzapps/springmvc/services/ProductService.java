@@ -10,4 +10,6 @@ public interface ProductService {
     Product getProductById(int id);
 
     Product saveOrUpdate(Product product);
+
+    void deleteProduct(Integer id);
 }

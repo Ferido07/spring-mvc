@@ -44,6 +44,11 @@ public class ProductServiceImpl implements ProductService {
         return Collections.max(products.keySet()) + 1;
     }
 
+    @Override
+    public void deleteProduct(Integer id) {
+        products.remove(id);
+    }
+
     private HashMap<Integer,Product> loadProducts(){
         products = new HashMap<>();
 
