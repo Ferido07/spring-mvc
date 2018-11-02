@@ -1,6 +1,6 @@
 package com.fyzapps.springmvc.controllers;
 
-import com.fyzapps.springmvc.models.Product;
+import com.fyzapps.springmvc.domain.Product;
 import com.fyzapps.springmvc.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,25 +19,25 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @RequestMapping("/products")
+    @RequestMapping({"/products","/products/list"})
     public String listAllProducts(Model model){
-        model.addAttribute("products",productService.getAllProducts());
-        return "products";
+        model.addAttribute("products",productService.getAll());
+        return "product/list";
     }
 
     @RequestMapping("/products/{id}")
     public String getProduct(@PathVariable int id, Model model){
-        model.addAttribute("product",productService.getProductById(id));
-        return "product";
+        model.addAttribute("product",productService.getById(id));
+        return "product/show";
     }
 
     @RequestMapping("/products/create")
     public String createProduct(Model model){
         model.addAttribute("product", new Product());
-        return "productForm";
+        return "product/productForm";
     }
 
-    @RequestMapping(value = "/product", method = RequestMethod.POST)
+    @RequestMapping(value = "/products/create", method = RequestMethod.POST)
     public String createOrUpdate(Product product){
         Product savedProduct = productService.saveOrUpdate(product);
         return "redirect:/products/" + savedProduct.getId();
@@ -45,13 +45,13 @@ public class ProductController {
 
     @RequestMapping("/products/edit/{id}")
     public String edit(@PathVariable Integer id, Model model){
-        model.addAttribute("product",productService.getProductById(id));
-        return "productForm";
+        model.addAttribute("product",productService.getById(id));
+        return "product/productForm";
     }
 
     @RequestMapping("/products/delete/{id}")
     public String delete(@PathVariable Integer id){
-        productService.deleteProduct(id);
+        productService.delete(id);
         return "redirect:/products";
     }
 }

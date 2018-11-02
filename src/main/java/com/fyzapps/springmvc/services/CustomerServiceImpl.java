@@ -1,70 +1,53 @@
 package com.fyzapps.springmvc.services;
 
-import com.fyzapps.springmvc.models.Customer;
+import com.fyzapps.springmvc.domain.Customer;
+import com.fyzapps.springmvc.domain.DomainObject;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
-public class CustomerServiceImpl implements CustomerService {
-    private HashMap<Integer,Customer> customers;
+public class CustomerServiceImpl extends  AbstractMapService implements CustomerService {
 
-    public CustomerServiceImpl() {
-        this.customers = loadCustomers();
-    }
-
-    private HashMap<Integer,Customer> loadCustomers() {
-        customers = new HashMap<>();
+    @Override
+    public void loadDomainObjects() {
+        map = new HashMap<>();
 
         Customer customer1 = new Customer();
         customer1.setId(1);
         customer1.setFirstName("Ferid");
         customer1.setLastName("Zuber");
-        customers.put(1,customer1);
+        map.put(1,customer1);
 
         Customer customer2 = new Customer();
         customer2.setId(2);
         customer2.setFirstName("Customer");
         customer2.setLastName("2");
-        customers.put(2,customer2);
+        map.put(2,customer2);
 
         Customer customer3 = new Customer();
         customer3.setId(3);
         customer3.setFirstName("Customer");
         customer3.setLastName("3");
-        customers.put(3,customer3);
-
-        return customers;
+        map.put(3,customer3);
     }
 
     @Override
-    public List<Customer> getAllCustomers() {
-        return new ArrayList<>(customers.values());
+    public List<DomainObject> getAll(){
+        return super.listAll();
     }
-
     @Override
-    public Customer getCustomerById(Integer id) {
-        return customers.get(id);
+    public Customer getById(Integer id) {
+        return (Customer) super.getById(id);
     }
 
     @Override
     public Customer saveOrUpdate(Customer customer) {
-        if (customer != null){
-            if(customer.getId() == null){
-                customer.setId(getNextKey());
-            }
-            customers.put(customer.getId(),customer);
-            return customer;
-        }
-        else throw new RuntimeException("Customer cannot be null.");
-    }
-
-    private Integer getNextKey() {
-        return Collections.max(customers.keySet()) + 1;
+       return (Customer) super.saveOrUpdate(customer);
     }
 
     @Override
-    public void deleteCustomer(Integer id) {
-        customers.remove(id);
+    public void delete(Integer id) {
+        super.delete(id);
     }
 }

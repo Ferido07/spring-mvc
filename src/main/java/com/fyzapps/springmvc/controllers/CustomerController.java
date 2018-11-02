@@ -1,6 +1,6 @@
 package com.fyzapps.springmvc.controllers;
 
-import com.fyzapps.springmvc.models.Customer;
+import com.fyzapps.springmvc.domain.Customer;
 import com.fyzapps.springmvc.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,14 +22,14 @@ public class CustomerController {
 
     @RequestMapping({"","/list"})
     public String listAllCustomers(Model model){
-        model.addAttribute("customers",customerService.getAllCustomers());
+        model.addAttribute("customers",customerService.getAll());
         return "customer/list";
     }
 
     @RequestMapping("/{id}")
     public String getCustomer(@PathVariable Integer id, Model model){
-        model.addAttribute("customer",customerService.getCustomerById(id));
-        return "customer/customer";
+        model.addAttribute("customer",customerService.getById(id));
+        return "customer/show";
     }
 
     @RequestMapping("/create")
@@ -46,13 +46,13 @@ public class CustomerController {
 
     @RequestMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model){
-        model.addAttribute("customer",customerService.getCustomerById(id));
+        model.addAttribute("customer",customerService.getById(id));
         return "customer/customerForm";
     }
 
     @RequestMapping("/delete/{id}")
     public String delete(@PathVariable Integer id){
-        customerService.deleteCustomer(id);
+        customerService.delete(id);
         return "redirect:/customers";
     }
 }

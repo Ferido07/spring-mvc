@@ -1,15 +1,6 @@
 package com.fyzapps.springmvc.services;
 
-import com.fyzapps.springmvc.models.Product;
+import com.fyzapps.springmvc.domain.Product;
 
-import java.util.List;
-
-public interface ProductService {
-    List<Product> getAllProducts();
-
-    Product getProductById(int id);
-
-    Product saveOrUpdate(Product product);
-
-    void deleteProduct(Integer id);
+public interface ProductService extends CRUDService<Product>{
 }

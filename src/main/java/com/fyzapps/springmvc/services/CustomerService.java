@@ -1,16 +1,7 @@
 package com.fyzapps.springmvc.services;
 
-import com.fyzapps.springmvc.models.Customer;
+import com.fyzapps.springmvc.domain.Customer;
 
-import java.util.List;
+public interface CustomerService extends CRUDService<Customer>{
 
-public interface CustomerService {
-
-    List<Customer> getAllCustomers();
-
-    Customer getCustomerById(Integer id);
-
-    Customer saveOrUpdate(Customer customer);
-
-    void deleteCustomer(Integer id);
 }

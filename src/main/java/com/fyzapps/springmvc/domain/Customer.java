@@ -1,16 +1,18 @@
-package com.fyzapps.springmvc.models;
+package com.fyzapps.springmvc.domain;
 
-public class Customer {
+public class Customer implements DomainObject {
 
     private Integer id;
     private String firstName;
     private String lastName;
     private String email, phoneNo, address1, address2, city, state, zipCode;
 
+    @Override
     public Integer getId() {
         return id;
     }
 
+    @Override
     public void setId(Integer id) {
         this.id = id;
     }
